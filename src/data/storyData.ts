@@ -5,21 +5,21 @@ export const characters: Character[] = [
     id: 'akira',
     name: 'Рицу',
     image: 'https://cdn.poehali.dev/files/1000169690.jpg',
-    description: 'Безжалостный лидер террористической организации "Мировые Отбросы"',
+    description: 'Добрый и заботливый старший брат, лидер организации "Мировые Отбросы"',
     unlocked: true
   },
   {
     id: 'yuki',
-    name: 'Неко-чан',
+    name: 'Киоко',
     image: 'https://cdn.poehali.dev/files/1000169325.png',
-    description: 'Милая кошка-девочка с игривым характером',
+    description: 'Цундэре кошка-девочка с колючим характером',
     unlocked: false
   },
   {
     id: 'kaito',
     name: 'Рику',
     image: 'https://cdn.poehali.dev/files/1000162363.jpg',
-    description: 'Младший брат Рицу, агент спецслужб, пытающийся остановить террористов',
+    description: 'Младший брат Рицу, загадочный манипулятор в очках',
     unlocked: false
   }
 ];
@@ -28,7 +28,7 @@ export const scenes: Record<string, Scene> = {
   start: {
     id: 'start',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: '**BREAKING NEWS**: Террористическая организация "Мировые Отбросы" угрожает уничтожить человечество... Первый день в новой школе. Академия "Сакура" - прикрытие для базы М.О. На стенах - зловещий символ мухи и надпись кровью: "Человечество - болезнь. Мы - лекарство."',
+    text: 'Первый день в новой школе. Академия "Сакура" выглядит обычно, но атмосфера напряжённая. На стенах странные граффити с символом мухи... Что здесь происходит?',
     choices: [
       {
         id: 'enter_school',
@@ -53,7 +53,7 @@ export const scenes: Record<string, Scene> = {
   graffiti_clue: {
     id: 'graffiti_clue',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Приглядываясь, ты замечаешь кровавые пятна. Под символом мухи написано: "Человечество - паразит. Мы уничтожим всё. Во имя Хаоса." Вдалеке слышны сирены...',
+    text: 'Приглядываясь, ты понимаешь - это не просто граффити. Под символом мухи написано: "Мы те, кого отвергли. Мы - Отбросы. Но мы здесь. И мы сильнее."',
     choices: [
       {
         id: 'enter_after_clue',
@@ -72,7 +72,7 @@ export const scenes: Record<string, Scene> = {
   students_warning: {
     id: 'students_warning',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Студенты бледнеют от ужаса. Один дрожащим голосом шепчет: "Мировые Отбросы... Они уже убили 50 студентов. Беги, пока не поздно! Они служат шизофреническому богу Хаоса!" Он убегает в панике.',
+    text: 'Студенты нервно оглядываются. Один тихо говорит: "Мировые Отбросы... Они странные, но Рицу-сан вроде добрый. А вот его брат Рику... с ним лучше не сталкиваться."',
     nextScene: 'corridor'
   },
   corridor: {
@@ -80,7 +80,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: 'Коридор пуст. Вдруг из тени появляется парень в чёрном. В его руке - нож. Глаза безумны. "Новая жертва для Хаоса?" *холодно улыбается* "Я - Рицу, лидер Мировых Отбросов. Выбирай - присоединишься к нам или умрёшь."',
+    text: 'В коридоре к тебе подходит парень в чёрном пальто. Его взгляд тёплый и заботливый. "Новенький? Ты выглядишь растерянным." *мягко улыбается* "Я Рицу, староста школы. Не бойся, я помогу тебе освоиться."',
     choices: [
       {
         id: 'admit_saw',
@@ -107,7 +107,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Честность... перед смертью." Он проводит ножом по твоему лицу. "Мировые Отбросы - мы не просто организация. Мы - божество. Мы уничтожим этот прогнивший мир. Хочешь стать частью Хаоса?"',
+    text: '"Честность - редкое качество." Он тёпло улыбается. "Мировые Отбросы - это моя организация. Мы помогаем тем, кого отвергло общество. Я забочусь о каждом члене, как о младшем брате. Хочешь присоединиться?"',
     choices: [
       {
         id: 'shake_hand',
@@ -134,15 +134,15 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Лжецы... должны... умереть." *безумный смех* Он поднимает нож. "Хаос не прощает предательства!" Вдруг в коридор врывается Рику с пистолетом!',
-    nextScene: 'riku_saves'
+    text: '"Ложь?" Рицу грустно улыбается. "Ничего, я понимаю. Все боятся в первый день." Вдруг в коридор входит парень в очках. Он поправляет очки и холодно улыбается...',
+    nextScene: 'riku_appears'
   },
   ritsu_intro: {
     id: 'ritsu_intro',
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Меня зовут Рицу. Я тот, кого ты будешь либо уважать, либо бояться. Здесь не место для слабых." Он смотрит на тебя оценивающе. "А ты... похоже, не из слабых."',
+    text: '"Меня зовут Рицу. Я стараюсь помогать всем новеньким." Он заботливо смотрит на тебя. "Если тебе нужна помощь - обращайся. Я всегда здесь для своих."',
     choices: [
       {
         id: 'confident_response',
@@ -218,8 +218,8 @@ export const scenes: Record<string, Scene> = {
     id: 'courtyard',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
-    speaker: 'Неко-чан',
-    text: 'На школьном дворе к тебе подбегает испуганная девушка с кошачьими ушками. "Н-ня! Пожалуйста, спаси меня!" *прячется за тобой* "Мировые Отбросы... они убили мою семью, ня... Рицу хочет меня принести в жертву!"',
+    speaker: 'Киоко',
+    text: 'На школьном дворе стоит девушка с белыми кошачьими ушками. Заметив тебя, она отворачивается. "Ч-чего смотришь, бака?!" *краснеет* "Я не твой экскурсовод, ня! Сам разберёшься!" Но её хвостик нервно виляет.',
     choices: [
       {
         id: 'accept_help',
@@ -245,8 +245,8 @@ export const scenes: Record<string, Scene> = {
     id: 'neko_blush',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
-    speaker: 'Неко-чан',
-    text: '"Э-э-э? М-мои ушки?!" *краснеет и прикрывает ушки лапками* "Н-никто раньше так не говорил, ня... С-спасибо~" Её хвостик радостно виляет. "Т-ты какой-то особенный!"',
+    speaker: 'Киоко',
+    text: '"Ч-что?! Мои ушки?!" *краснеет и отворачивается* "Б-бака! Не думай, что я рада твоим комплиментам, ня!" Её ушки прижались, но хвостик предательски виляет. "Х-хотя... спасибо..." *тихо*',
     choices: [
       {
         id: 'continue_flirt',
@@ -724,32 +724,111 @@ export const scenes: Record<string, Scene> = {
       }
     ]
   },
-  riku_saves: {
-    id: 'riku_saves',
+  riku_appears: {
+    id: 'riku_appears',
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'kaito',
     speaker: 'Рику',
-    text: '"СТОЙ, БРАТ!" Рику целится в Рицу из пистолета. Слёзы текут по его лицу. "Я не могу больше... Ты убил сотни людей! Мировые Отбросы должны быть остановлены!" Рицу смеётся: "Предатель..."',
+    text: '"Брат... опять собираешь бездомных щенков?" *поправляет очки* Парень в очках смотрит на тебя холодным взглядом. "Рику, не надо..." - начинает Рицу. "Интересно..." *поправляет очки снова* "Как долго ты продержишься в нашей... организации?"',
     choices: [
       {
-        id: 'side_with_riku',
-        text: 'Встать на сторону Рику',
-        nextScene: 'hero_path',
-        impact: 'positive'
+        id: 'confront_riku',
+        text: 'Противостоять Рику',
+        nextScene: 'riku_interest',
+        impact: 'neutral'
       },
       {
-        id: 'side_with_ritsu',
-        text: 'Поддержать Рицу',
-        nextScene: 'villain_path',
+        id: 'ignore_riku',
+        text: 'Игнорировать его',
+        nextScene: 'riku_manipulation',
         impact: 'negative'
       },
       {
-        id: 'try_peace',
-        text: 'Попытаться остановить драку',
-        nextScene: 'tragic_choice',
+        id: 'ask_ritsu_help',
+        text: 'Попросить помощи у Рицу',
+        nextScene: 'brothers_dynamic',
+        impact: 'positive'
+      }
+    ]
+  },
+  riku_interest: {
+    id: 'riku_interest',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '*поправляет очки и усмехается* "Смелость? Или глупость?" Он подходит ближе, его взгляд пронзительный. "Я люблю ломать таких... самоуверенных. Это доставляет мне удовольствие." *зловеще улыбается* "Посмотрим, как быстро ты сломаешься."',
+    choices: [
+      {
+        id: 'stand_ground',
+        text: 'Не отступать',
+        nextScene: 'riku_challenge',
+        impact: 'positive'
+      },
+      {
+        id: 'seek_ritsu',
+        text: 'Искать защиты у Рицу',
+        nextScene: 'ritsu_protects',
         impact: 'neutral'
       }
     ]
+  },
+  riku_manipulation: {
+    id: 'riku_manipulation',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '*поправляет очки* "Игнорируешь меня? Как... предсказуемо." Он шепчет тебе на ухо: "Мой брат кажется добрым. Но знаешь ли ты, что он скрывает?" *поправляет очки и усмехается* "Мировые Отбросы... не то, чем кажутся."',
+    nextScene: 'dark_hints'
+  },
+  brothers_dynamic: {
+    id: 'brothers_dynamic',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Рицу заслоняет тебя собой. "Рику, хватит. Он новый член семьи." Рику *поправляет очки* и холодно улыбается: "Семья? Брат, ты слишком мягкий. Это слабость. А слабость... надо искоренять."',
+    choices: [
+      {
+        id: 'defend_ritsu',
+        text: 'Защитить Рицу',
+        nextScene: 'ritsu_grateful',
+        impact: 'positive'
+      },
+      {
+        id: 'listen_riku',
+        text: 'Послушать Рику',
+        nextScene: 'riku_seduction',
+        impact: 'neutral'
+      }
+    ]
+  },
+  riku_challenge: {
+    id: 'riku_challenge',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '*поправляет очки, глаза блестят за стёклами* "Не отступаешь? Восхитительно." Он достаёт шахматную фигуру. "Игра. Если выиграешь - останешься. Проиграешь..." *зловеще улыбается* "...узнаешь правду об организации."',
+    choices: [
+      {
+        id: 'accept_game',
+        text: 'Принять вызов',
+        nextScene: 'chess_game',
+        impact: 'neutral'
+      },
+      {
+        id: 'refuse_game',
+        text: 'Отказаться',
+        nextScene: 'riku_reveals',
+        impact: 'negative'
+      }
+    ]
+  },
+  ritsu_protects: {
+    id: 'ritsu_protects',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Рицу обнимает тебя защитно. "Рику, это уже слишком." Его голос твёрдый. "Он под моей защитой." Рику *поправляет очки*: "Защитой? Брат... ты опять привязываешься. Помнишь, чем это закончилось в прошлый раз?"',
+    nextScene: 'past_revealed'
   },
   hero_path: {
     id: 'hero_path',
