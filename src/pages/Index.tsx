@@ -1,13 +1,23 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { GameEngine } from '@/components/GameEngine';
+import { Gallery } from '@/components/Gallery';
 
 const Index = () => {
+  const [showGallery, setShowGallery] = useState(false);
+  const [unlockedCharacters, setUnlockedCharacters] = useState<string[]>(['akira']);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
-    </div>
+    <>
+      <GameEngine 
+        onGalleryOpen={() => setShowGallery(true)}
+      />
+      {showGallery && (
+        <Gallery 
+          unlockedCharacters={unlockedCharacters}
+          onClose={() => setShowGallery(false)}
+        />
+      )}
+    </>
   );
 };
 
