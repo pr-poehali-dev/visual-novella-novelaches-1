@@ -3,9 +3,9 @@ import { Character, Scene } from '@/types/story';
 export const characters: Character[] = [
   {
     id: 'akira',
-    name: 'Акира',
-    image: 'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=600&fit=crop',
-    description: 'Загадочный студент с секретным прошлым',
+    name: 'Рицу',
+    image: 'https://cdn.poehali.dev/files/1000169690.jpg',
+    description: 'Харизматичный лидер тайной организации "Мировые Отбросы"',
     unlocked: true
   },
   {
@@ -17,9 +17,9 @@ export const characters: Character[] = [
   },
   {
     id: 'kaito',
-    name: 'Кайто',
+    name: 'Рику',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop',
-    description: 'Тихий книголюб с острым умом',
+    description: 'Младший брат Рицу, тихий книголюб с тёмным прошлым',
     unlocked: false
   }
 ];
@@ -28,7 +28,7 @@ export const scenes: Record<string, Scene> = {
   start: {
     id: 'start',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Первый день в новой школе. Солнце ярко светит, и ты стоишь у ворот академии "Сакура". Впереди тебя ждут новые знакомства и таинственные события...',
+    text: 'Первый день в новой школе. Академия "Сакура" выглядит обычно, но что-то в атмосфере настораживает. На стенах ты замечаешь странные граффити - силуэт мухи и надпись "М.О."...',
     choices: [
       {
         id: 'enter_school',
@@ -38,29 +38,191 @@ export const scenes: Record<string, Scene> = {
       },
       {
         id: 'look_around',
-        text: 'Осмотреться вокруг',
+        text: 'Изучить граффити подробнее',
+        nextScene: 'graffiti_clue',
+        impact: 'neutral'
+      },
+      {
+        id: 'courtyard_first',
+        text: 'Обойти здание со двора',
         nextScene: 'courtyard',
         impact: 'neutral'
       }
     ]
   },
+  graffiti_clue: {
+    id: 'graffiti_clue',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: 'Приглядываясь, ты понимаешь - это не просто граффити. Под символом мухи написано: "Мы те, кого отвергли. Мы - отбросы мира. И мы сильнее всех." Что это значит?',
+    choices: [
+      {
+        id: 'enter_after_clue',
+        text: 'Войти в школу',
+        nextScene: 'corridor',
+        impact: 'neutral'
+      },
+      {
+        id: 'ask_students',
+        text: 'Спросить у прохожих студентов',
+        nextScene: 'students_warning',
+        impact: 'neutral'
+      }
+    ]
+  },
+  students_warning: {
+    id: 'students_warning',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: 'Студенты, заметив твой интерес к граффити, быстро отходят. Один шепчет: "Не лезь в дела Мировых Отбросов, если жизнь дорога..." Похоже, это что-то серьёзное.',
+    nextScene: 'corridor'
+  },
   corridor: {
     id: 'corridor',
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
-    speaker: 'Акира',
-    text: 'В коридоре тебя замечает высокий парень с тёмными волосами. Он смотрит на тебя внимательно, словно пытается что-то понять.',
+    speaker: 'Рицу',
+    text: 'В коридоре к тебе подходит парень в чёрном пальто с серебряным крестом. Его взгляд пронзительный и уверенный. "Новенький? Интересно... Ты видел наше послание у входа?"',
     choices: [
       {
-        id: 'greet_akira',
-        text: 'Поздороваться первым',
-        nextScene: 'akira_friendly',
+        id: 'admit_saw',
+        text: 'Признаться, что видел граффити',
+        nextScene: 'ritsu_interest',
         impact: 'positive'
       },
       {
-        id: 'ignore_akira',
-        text: 'Пройти мимо',
-        nextScene: 'akira_distant',
+        id: 'deny',
+        text: 'Солгать, что не заметил',
+        nextScene: 'ritsu_suspicious',
+        impact: 'negative'
+      },
+      {
+        id: 'ask_who',
+        text: 'Спросить, кто он такой',
+        nextScene: 'ritsu_intro',
+        impact: 'neutral'
+      }
+    ]
+  },
+  ritsu_interest: {
+    id: 'ritsu_interest',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Честность - редкое качество. Мне нравится." Он протягивает руку. "Рицу. Лидер организации, о которой лучше не болтать с учителями. Мировые Отбросы - мы собираем тех, кто не вписывается в систему."',
+    choices: [
+      {
+        id: 'shake_hand',
+        text: 'Пожать руку',
+        nextScene: 'ritsu_recruitment',
+        impact: 'positive'
+      },
+      {
+        id: 'refuse_hand',
+        text: 'Отказаться',
+        nextScene: 'ritsu_challenge',
+        impact: 'negative'
+      },
+      {
+        id: 'ask_more',
+        text: 'Спросить о целях организации',
+        nextScene: 'mo_explanation',
+        impact: 'neutral'
+      }
+    ]
+  },
+  ritsu_suspicious: {
+    id: 'ritsu_suspicious',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Лжёшь." Его голос становится холоднее. "Я всегда чувствую ложь. В нашей организации нет места трусам и лжецам." Он разворачивается, чтобы уйти.',
+    choices: [
+      {
+        id: 'apologize',
+        text: 'Извиниться и сказать правду',
+        nextScene: 'ritsu_second_chance',
+        impact: 'neutral'
+      },
+      {
+        id: 'let_go',
+        text: 'Отпустить его',
+        nextScene: 'alternative_path',
+        impact: 'negative'
+      }
+    ]
+  },
+  ritsu_intro: {
+    id: 'ritsu_intro',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Меня зовут Рицу. Я тот, кого ты будешь либо уважать, либо бояться. Здесь не место для слабых." Он смотрит на тебя оценивающе. "А ты... похоже, не из слабых."',
+    choices: [
+      {
+        id: 'confident_response',
+        text: 'Уверенно согласиться',
+        nextScene: 'ritsu_recruitment',
+        impact: 'positive'
+      },
+      {
+        id: 'modest_response',
+        text: 'Скромно промолчать',
+        nextScene: 'ritsu_test',
+        impact: 'neutral'
+      }
+    ]
+  },
+  mo_explanation: {
+    id: 'mo_explanation',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Мировые Отбросы - это мы. Те, кого общество отвергло. Бунтари, изгои, те, кто не вписывается в рамки. Мы создаём свои правила. Мы - свободны." В его глазах горит огонь убеждённости.',
+    choices: [
+      {
+        id: 'join_mo',
+        text: 'Я хочу присоединиться',
+        nextScene: 'ritsu_recruitment',
+        impact: 'positive'
+      },
+      {
+        id: 'think_about',
+        text: 'Мне нужно подумать',
+        nextScene: 'ritsu_waiting',
+        impact: 'neutral'
+      },
+      {
+        id: 'decline_mo',
+        text: 'Это не для меня',
+        nextScene: 'alternative_path',
+        impact: 'negative'
+      }
+    ]
+  },
+  ritsu_recruitment: {
+    id: 'ritsu_recruitment',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Добро пожаловать в семью, отброс." Он улыбается - впервые ты видишь настоящее тепло в его глазах. "После уроков встретимся на крыше. Там я познакомлю тебя с остальными."',
+    nextScene: 'rooftop_meeting'
+  },
+  ritsu_test: {
+    id: 'ritsu_test',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Скромность? Или страх?" Рицу достаёт сигарету. "Докажи, что ты достоин быть одним из нас. После уроков найди секретную комнату организации. Подсказка - там, где всегда ненавидел себя."',
+    choices: [
+      {
+        id: 'accept_test',
+        text: 'Принять испытание',
+        nextScene: 'search_secret_room',
+        impact: 'neutral'
+      },
+      {
+        id: 'refuse_test',
+        text: 'Отказаться',
+        nextScene: 'alternative_path',
         impact: 'negative'
       }
     ]
@@ -70,12 +232,12 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
     speaker: 'Неко-чан',
-    text: 'На школьном дворе к тебе подбегает милая девушка с белыми кошачьими ушками и хвостиком. "Н-ня! Привет! Ты новенький? Я Неко-чан!" *машет лапкой*',
+    text: 'На школьном дворе к тебе подбегает милая девушка с белыми кошачьими ушками и хвостиком. "Н-ня! Привет! Ты новенький? Я Неко-чан!" *машет лапкой* "Хочешь, я покажу тебе школу, ня~?"',
     choices: [
       {
         id: 'accept_help',
-        text: 'Принять её помощь',
-        nextScene: 'yuki_route',
+        text: 'С радостью согласиться',
+        nextScene: 'neko_tour',
         impact: 'positive'
       },
       {
@@ -83,121 +245,119 @@ export const scenes: Record<string, Scene> = {
         text: 'Вежливо отказаться',
         nextScene: 'solo_exploration',
         impact: 'neutral'
-      }
-    ]
-  },
-  akira_friendly: {
-    id: 'akira_friendly',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: '"Привет... Ты новенький? Я Акира." Его голос звучит мягко, и ты замечаешь лёгкую улыбку на его лице.',
-    choices: [
-      {
-        id: 'ask_about_school',
-        text: 'Спросить о школе',
-        nextScene: 'akira_explains',
-        impact: 'positive'
       },
       {
-        id: 'ask_about_clubs',
-        text: 'Спросить о клубах',
-        nextScene: 'clubs_info',
-        impact: 'neutral'
+        id: 'flirt_neko',
+        text: 'Сделать комплимент её ушкам',
+        nextScene: 'neko_blush',
+        impact: 'positive'
       }
     ]
   },
-  akira_distant: {
-    id: 'akira_distant',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: 'Парень смотрит тебе вслед с лёгким недоумением, но ничего не говорит. Может быть, стоило быть более дружелюбным?',
-    nextScene: 'classroom_alone'
-  },
-  yuki_route: {
-    id: 'yuki_route',
+  neko_blush: {
+    id: 'neko_blush',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
     speaker: 'Неко-чан',
-    text: '"Мяу! Отлично! Пойдём, я покажу тебе школу!" Неко-чан радостно берёт твою руку, её хвостик весело виляет. "У нас тут столько интересного, ня~!"',
-    nextScene: 'school_tour'
-  },
-  solo_exploration: {
-    id: 'solo_exploration',
-    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Ты решаешь исследовать школу самостоятельно. Территория огромная, и ты понимаешь, что потерялся...',
+    text: '"Э-э-э? М-мои ушки?!" *краснеет и прикрывает ушки лапками* "Н-никто раньше так не говорил, ня... С-спасибо~" Её хвостик радостно виляет. "Т-ты какой-то особенный!"',
     choices: [
       {
-        id: 'find_library',
-        text: 'Зайти в библиотеку',
-        nextScene: 'library_kaito',
-        impact: 'neutral'
-      },
-      {
-        id: 'find_rooftop',
-        text: 'Подняться на крышу',
-        nextScene: 'rooftop_mystery',
-        impact: 'neutral'
-      }
-    ]
-  },
-  akira_explains: {
-    id: 'akira_explains',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: '"Эта школа... особенная. Здесь учатся не только обычные студенты. Но об этом ты узнаешь позже." Акира загадочно улыбается.',
-    nextScene: 'mystery_deepens'
-  },
-  clubs_info: {
-    id: 'clubs_info',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: '"У нас много клубов - литературный, музыкальный, кендо... Но самый интересный - клуб исследования аномалий." Его глаза вспыхивают.',
-    choices: [
-      {
-        id: 'join_anomaly_club',
-        text: 'Заинтересоваться клубом аномалий',
-        nextScene: 'anomaly_club',
+        id: 'continue_flirt',
+        text: 'Продолжить флиртовать',
+        nextScene: 'neko_romantic',
         impact: 'positive'
       },
       {
-        id: 'normal_clubs',
-        text: 'Выбрать обычный клуб',
-        nextScene: 'normal_route',
+        id: 'ask_tour',
+        text: 'Попросить экскурсию',
+        nextScene: 'neko_tour',
         impact: 'neutral'
       }
     ]
   },
-  library_kaito: {
-    id: 'library_kaito',
-    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
-    character: 'kaito',
-    speaker: 'Кайто',
-    text: 'В библиотеке ты встречаешь парня, погружённого в чтение старинной книги. Он поднимает взгляд: "Новый студент? Интересно..."',
+  neko_romantic: {
+    id: 'neko_romantic',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"М-мяу~! Ты меня смущаешь, ня..." *прячет лицо* Внезапно из-за угла появляется Рицу. Он смотрит на вас двоих с непроницаемым выражением лица. "Неко-чан. Этот новенький с тобой?"',
+    nextScene: 'love_triangle_start'
+  },
+  love_triangle_start: {
+    id: 'love_triangle_start',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Неко-чан нервно прячется за тебя. "Р-Рицу-сан... Он просто новенький, ня..." Рицу подходит ближе, его взгляд изучает тебя. "Интересно. Новенький уже успел подружиться с Неко-чан. Она... особенная для меня."',
     choices: [
       {
-        id: 'talk_books',
-        text: 'Поговорить о книгах',
-        nextScene: 'kaito_friendship',
+        id: 'back_off',
+        text: 'Извиниться и отойти',
+        nextScene: 'ritsu_wins_round1',
+        impact: 'negative'
+      },
+      {
+        id: 'stand_ground',
+        text: 'Не отступать',
+        nextScene: 'rivalry_begins',
         impact: 'positive'
       },
       {
-        id: 'leave_library',
-        text: 'Извиниться и уйти',
-        nextScene: 'explore_more',
+        id: 'ask_relationship',
+        text: 'Спросить об их отношениях',
+        nextScene: 'complicated_relationship',
         impact: 'neutral'
       }
     ]
   },
-  school_tour: {
-    id: 'school_tour',
+  rivalry_begins: {
+    id: 'rivalry_begins',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Рицу усмехается. "Смелый. Мне нравится." Он поворачивается к Неко-чан. "Но помни, новенький - некоторые вещи стоят того, чтобы за них бороться." Неко-чан смущённо молчит.',
+    choices: [
+      {
+        id: 'accept_challenge',
+        text: 'Принять вызов',
+        nextScene: 'competition_route',
+        impact: 'positive'
+      },
+      {
+        id: 'stay_friends',
+        text: 'Предложить дружбу',
+        nextScene: 'friendship_attempt',
+        impact: 'neutral'
+      }
+    ]
+  },
+  complicated_relationship: {
+    id: 'complicated_relationship',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"Р-Рицу-сан... он спас меня когда-то, ня. Но мы просто друзья! Правда, Рицу-сан?" Рицу молчит, его лицо непроницаемо. Ситуация напряжённая.',
+    choices: [
+      {
+        id: 'support_neko',
+        text: 'Поддержать Неко-чан',
+        nextScene: 'neko_grateful',
+        impact: 'positive'
+      },
+      {
+        id: 'leave_situation',
+        text: 'Уйти из неловкой ситуации',
+        nextScene: 'alternative_path',
+        impact: 'neutral'
+      }
+    ]
+  },
+  neko_tour: {
+    id: 'neko_tour',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
     character: 'yuki',
     speaker: 'Неко-чан',
-    text: 'Неко-чан показывает тебе всю школу, игриво прыгая впереди. "Здесь столовая - тут дают вкусную рыбку, ня! А здесь спортзал..." Её ушки забавно подрагивают, когда она говорит. Ты чувствуешь тепло от её дружелюбия.',
+    text: 'Неко-чан показывает тебе всю школу, игриво прыгая впереди. "Здесь столовая - тут дают вкусную рыбку, ня! А здесь спортзал..." Её ушки забавно подрагивают, когда она говорит.',
     choices: [
       {
         id: 'pet_ears',
@@ -206,67 +366,381 @@ export const scenes: Record<string, Scene> = {
         impact: 'positive'
       },
       {
+        id: 'ask_about_mo',
+        text: 'Спросить про "Мировые Отбросы"',
+        nextScene: 'neko_warns',
+        impact: 'neutral'
+      },
+      {
         id: 'continue_tour',
         text: 'Продолжить экскурсию',
-        nextScene: 'end_day1_happy',
+        nextScene: 'library_encounter',
         impact: 'neutral'
       }
     ]
-  },
-  rooftop_mystery: {
-    id: 'rooftop_mystery',
-    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
-    text: 'На крыше ты находишь странный символ, нарисованный мелом. Он светится слабым фиолетовым светом...',
-    nextScene: 'mystery_begins'
-  },
-  mystery_deepens: {
-    id: 'mystery_deepens',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: '"Если хочешь узнать правду об этой школе, встретимся после уроков у старого дуба." Акира уходит, оставляя тебя в раздумьях.',
-    nextScene: 'end_day1_mystery'
-  },
-  anomaly_club: {
-    id: 'anomaly_club',
-    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
-    character: 'akira',
-    speaker: 'Акира',
-    text: '"Хороший выбор. Добро пожаловать в клуб. Но помни - то, что ты узнаешь, изменит твою жизнь навсегда."',
-    nextScene: 'end_day1_mystery'
-  },
-  kaito_friendship: {
-    id: 'kaito_friendship',
-    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
-    character: 'kaito',
-    speaker: 'Кайто',
-    text: '"Редко встречаю кого-то, кто интересуется книгами. Хочешь, расскажу тебе о секретной библиотеке школы?"',
-    nextScene: 'end_day1_mystery'
   },
   neko_happy: {
     id: 'neko_happy',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
     speaker: 'Неко-чан',
-    text: '"М-мяя~! *краснеет и закрывает лицо лапками* Э-это было приятно, ня..." Её ушки радостно дрожат, а хвостик быстро виляет из стороны в сторону. "Т-ты... ты мне нравишься! Давай дружить, ня~!"',
-    nextScene: 'end_day1_happy'
+    text: '"М-мяя~! *краснеет и закрывает лицо лапками* Э-это было приятно, ня..." Её ушки радостно дрожат, а хвостик быстро виляет. "Т-ты... ты мне нравишься! Давай дружить, ня~!"',
+    choices: [
+      {
+        id: 'confess_feelings',
+        text: 'Признаться в симпатии',
+        nextScene: 'neko_confession_response',
+        impact: 'positive'
+      },
+      {
+        id: 'agree_friends',
+        text: 'Согласиться дружить',
+        nextScene: 'library_encounter',
+        impact: 'neutral'
+      }
+    ]
   },
-  end_day1_happy: {
-    id: 'end_day1_happy',
+  neko_confession_response: {
+    id: 'neko_confession_response',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
-    text: 'Первый день закончился прекрасно. Ты обрёл друзей и начинаешь чувствовать себя как дома в новой школе.',
-    nextScene: 'continue'
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"Ч-что?! Т-ты серьёзно, ня?!" *её ушки встают торчком* "Я... я тоже... но..." Она оглядывается. "Т-только... Рицу-сан может разозлиться. Он очень ревнивый, ня..."',
+    nextScene: 'dangerous_romance'
   },
-  end_day1_mystery: {
-    id: 'end_day1_mystery',
-    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
-    text: 'Первый день подходит к концу, но ты чувствуешь, что это только начало чего-то невероятного...',
-    nextScene: 'continue'
+  neko_warns: {
+    id: 'neko_warns',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: 'Неко-чан хмурится, её ушки прижимаются. "М-Мировые Отбросы... Это опасная организация, ня. Рицу-сан - их лидер. Он может показаться пугающим, но... у него доброе сердце. Просто его ранили."',
+    choices: [
+      {
+        id: 'want_know_more',
+        text: 'Хочу узнать больше о Рицу',
+        nextScene: 'neko_tells_story',
+        impact: 'neutral'
+      },
+      {
+        id: 'ask_join',
+        text: 'Спросить, как вступить',
+        nextScene: 'neko_concern',
+        impact: 'neutral'
+      }
+    ]
   },
-  continue: {
-    id: 'continue',
+  neko_tells_story: {
+    id: 'neko_tells_story',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"Рицу-сан... его отвергла семья, когда узнали о его младшем брате. С тех пор он собирает таких же отверженных. Говорит - я всегда ненавидел себя. Но теперь я принимаю себя. Ня..."',
+    choices: [
+      {
+        id: 'ask_about_brother',
+        text: 'Спросить про брата',
+        nextScene: 'riku_introduction',
+        impact: 'neutral'
+      },
+      {
+        id: 'comfort_neko',
+        text: 'Утешить Неко-чан',
+        nextScene: 'neko_touched',
+        impact: 'positive'
+      }
+    ]
+  },
+  solo_exploration: {
+    id: 'solo_exploration',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Продолжение следует...',
+    text: 'Ты решаешь исследовать школу самостоятельно. Территория огромная. Ты натыкаешься на старое здание с надписью "Библиотека".',
+    choices: [
+      {
+        id: 'enter_library',
+        text: 'Войти в библиотеку',
+        nextScene: 'library_encounter',
+        impact: 'neutral'
+      },
+      {
+        id: 'explore_rooftop',
+        text: 'Подняться на крышу',
+        nextScene: 'rooftop_secret',
+        impact: 'neutral'
+      }
+    ]
+  },
+  library_encounter: {
+    id: 'library_encounter',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: 'В тихой библиотеке сидит парень, очень похожий на Рицу, но более мягкий. Он читает философскую книгу. Заметив тебя, медленно поднимает взгляд. "Новый студент... Ты тоже чувствуешь это одиночество?"',
+    choices: [
+      {
+        id: 'agree_loneliness',
+        text: 'Согласиться',
+        nextScene: 'riku_connection',
+        impact: 'positive'
+      },
+      {
+        id: 'deny_loneliness',
+        text: 'Отрицать',
+        nextScene: 'riku_understanding',
+        impact: 'neutral'
+      },
+      {
+        id: 'ask_who_riku',
+        text: 'Спросить, кто он',
+        nextScene: 'riku_intro',
+        impact: 'neutral'
+      }
+    ]
+  },
+  riku_intro: {
+    id: 'riku_intro',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Меня зовут Рику. Я... младший брат Рицу." Он грустно улыбается. "Да, того самого лидера Мировых Отбросов. Но мы очень разные. Он бунтует, я - прячусь в книгах."',
+    choices: [
+      {
+        id: 'ask_relationship',
+        text: 'Спросить об отношениях с братом',
+        nextScene: 'brothers_story',
+        impact: 'neutral'
+      },
+      {
+        id: 'talk_books',
+        text: 'Поговорить о книгах',
+        nextScene: 'riku_friendship',
+        impact: 'positive'
+      },
+      {
+        id: 'ask_join_mo',
+        text: 'Спросить про присоединение к М.О.',
+        nextScene: 'riku_warning',
+        impact: 'neutral'
+      }
+    ]
+  },
+  brothers_story: {
+    id: 'brothers_story',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Родители хотели идеального сына. Рицу был близок к этому, пока не... защитил меня. Из-за меня его выгнали. С тех пор он изменился. Стал холодным. Я виноват." Его голос дрожит.',
+    choices: [
+      {
+        id: 'comfort_riku',
+        text: 'Утешить Рику',
+        nextScene: 'riku_grateful',
+        impact: 'positive'
+      },
+      {
+        id: 'defend_ritsu',
+        text: 'Сказать, что Рицу сильный',
+        nextScene: 'riku_agrees',
+        impact: 'neutral'
+      }
+    ]
+  },
+  riku_connection: {
+    id: 'riku_connection',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Значит, я не один..." Рику впервые улыбается искренне. "Знаешь, мой брат создал организацию для таких как мы. Но я... я не могу к ним присоединиться. Слишком боюсь."',
+    choices: [
+      {
+        id: 'encourage_riku',
+        text: 'Подбодрить его',
+        nextScene: 'riku_courage',
+        impact: 'positive'
+      },
+      {
+        id: 'understand_fear',
+        text: 'Понять его страх',
+        nextScene: 'riku_bond',
+        impact: 'positive'
+      }
+    ]
+  },
+  rooftop_secret: {
+    id: 'rooftop_secret',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    text: 'На крыше ты находишь секретную комнату организации. Стены покрыты граффити, в центре - символ мухи. Здесь явно собираются Мировые Отбросы. Вдруг дверь открывается...',
+    nextScene: 'caught_by_mo'
+  },
+  caught_by_mo: {
+    id: 'caught_by_mo',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Вот как... Ты нашёл наше место." Рицу входит с несколькими членами организации. "Смелый или глупый? Покажешь, что ты действительно заслуживаешь быть здесь?"',
+    choices: [
+      {
+        id: 'accept_initiation',
+        text: 'Пройти инициацию',
+        nextScene: 'mo_initiation',
+        impact: 'positive'
+      },
+      {
+        id: 'apologize_leave',
+        text: 'Извиниться и уйти',
+        nextScene: 'alternative_path',
+        impact: 'negative'
+      }
+    ]
+  },
+  rooftop_meeting: {
+    id: 'rooftop_meeting',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'На крыше собираются члены Мировых Отбросов. Рицу представляет тебя: "Это новый отброс. Тот, кто не боится быть собой." Все приветствуют тебя. Среди них... Неко-чан?!',
+    nextScene: 'neko_in_mo'
+  },
+  neko_in_mo: {
+    id: 'neko_in_mo',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"Н-ня?! Ты тоже здесь?!" Неко-чан удивлённо моргает. Рицу кладёт руку ей на плечо. "Неко-чан - один из первых членов. Её отвергли за то, что она... особенная." Его взгляд становится мягче.',
+    choices: [
+      {
+        id: 'support_neko_mo',
+        text: 'Поддержать Неко-чан',
+        nextScene: 'triangle_tension',
+        impact: 'neutral'
+      },
+      {
+        id: 'ask_about_ritsu_neko',
+        text: 'Спросить об их отношениях',
+        nextScene: 'ritsu_reveals_feelings',
+        impact: 'neutral'
+      }
+    ]
+  },
+  triangle_tension: {
+    id: 'triangle_tension',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Рицу замечает твой взгляд на Неко-чан. "Она значит многое для меня. Надеюсь, ты понимаешь." В его глазах - предупреждение. Неко-чан краснеет и прячется за ушками.',
+    choices: [
+      {
+        id: 'challenge_ritsu',
+        text: 'Бросить вызов',
+        nextScene: 'love_war',
+        impact: 'positive'
+      },
+      {
+        id: 'respect_claim',
+        text: 'Уважить его чувства',
+        nextScene: 'friendship_route',
+        impact: 'neutral'
+      },
+      {
+        id: 'ask_neko_choice',
+        text: 'Спросить выбор у Неко-чан',
+        nextScene: 'neko_confused',
+        impact: 'neutral'
+      }
+    ]
+  },
+  love_war: {
+    id: 'love_war',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Значит, война." Рицу серьёзно смотрит на тебя. "Хорошо. Пусть Неко-чан решит сама. Но готовься - я не сдамся без боя." Организация замерла в напряжении.',
+    nextScene: 'competition_begins'
+  },
+  competition_begins: {
+    id: 'competition_begins',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: 'Начинается необычное соперничество. Рицу и ты пытаетесь завоевать сердце Неко-чан. Но неожиданно в библиотеке ты встречаешь Рику, который тихо наблюдал за всем...',
+    nextScene: 'riku_jealous'
+  },
+  riku_jealous: {
+    id: 'riku_jealous',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Ты... нравишься моему брату. И Неко-чан тоже." Рику опускает глаза. "А мне... мне никогда не хватало смелости даже подойти к тебе. Я всегда был в тени брата."',
+    choices: [
+      {
+        id: 'comfort_riku_love',
+        text: 'Утешить Рику',
+        nextScene: 'riku_confession',
+        impact: 'positive'
+      },
+      {
+        id: 'stay_with_neko',
+        text: 'Остаться верным выбору',
+        nextScene: 'neko_ending_path',
+        impact: 'neutral'
+      },
+      {
+        id: 'confused_feelings',
+        text: 'Признаться в растерянности',
+        nextScene: 'multiple_routes',
+        impact: 'neutral'
+      }
+    ]
+  },
+  riku_confession: {
+    id: 'riku_confession',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Я... влюбился в тебя с первого взгляда." Рику краснеет. "Но мой брат тоже... и Неко-чан... Это так сложно. Прости. Я не должен был говорить." Он собирается уйти.',
+    choices: [
+      {
+        id: 'stop_riku',
+        text: 'Остановить его',
+        nextScene: 'riku_route',
+        impact: 'positive'
+      },
+      {
+        id: 'let_riku_go',
+        text: 'Отпустить',
+        nextScene: 'continue_triangle',
+        impact: 'neutral'
+      }
+    ]
+  },
+  dangerous_romance: {
+    id: 'dangerous_romance',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    text: 'Ты и Неко-чан начинаете встречаться тайно. Но секреты не могут храниться вечно. Рицу всё узнаёт...',
+    nextScene: 'ritsu_confrontation'
+  },
+  ritsu_confrontation: {
+    id: 'ritsu_confrontation',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Предательство." Рицу стоит на крыше, его лицо спокойно, но глаза горят. "Я доверял тебе. А ты... взял самое дорогое." Он сжимает кулаки. "Драка. Здесь и сейчас."',
+    choices: [
+      {
+        id: 'fight_ritsu',
+        text: 'Принять вызов',
+        nextScene: 'dramatic_fight',
+        impact: 'neutral'
+      },
+      {
+        id: 'apologize_ritsu',
+        text: 'Попытаться объясниться',
+        nextScene: 'ritsu_heartbreak',
+        impact: 'neutral'
+      }
+    ]
+  },
+  continue_story: {
+    id: 'continue_story',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: 'История только начинается. Впереди - драма, любовь, предательства и дружба. Мировые Отбросы ждут твоего выбора...',
     choices: [
       {
         id: 'restart',
@@ -275,5 +749,27 @@ export const scenes: Record<string, Scene> = {
         impact: 'neutral'
       }
     ]
+  },
+  alternative_path: {
+    id: 'alternative_path',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: 'Ты решаешь держаться подальше от Мировых Отбросов. Но судьба уже связала тебя с этой школой...',
+    nextScene: 'continue_story'
+  },
+  ritsu_second_chance: {
+    id: 'ritsu_second_chance',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Рицу останавливается. "Хорошо. Второй шанс. Но только один." Он протягивает руку. "Добро пожаловать в Мировые Отбросы."',
+    nextScene: 'rooftop_meeting'
+  },
+  ritsu_waiting: {
+    id: 'ritsu_waiting',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '"Подумай хорошо. Мы не играем в школьные клубы. Это - семья." Он уходит, оставляя тебя с выбором.',
+    nextScene: 'solo_exploration'
   }
 };
