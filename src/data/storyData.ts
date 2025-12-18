@@ -10,9 +10,9 @@ export const characters: Character[] = [
   },
   {
     id: 'yuki',
-    name: 'Юки',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop',
-    description: 'Энергичная староста класса',
+    name: 'Неко-чан',
+    image: 'https://cdn.poehali.dev/files/1000169325.png',
+    description: 'Милая кошка-девочка с игривым характером',
     unlocked: false
   },
   {
@@ -69,8 +69,8 @@ export const scenes: Record<string, Scene> = {
     id: 'courtyard',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
-    speaker: 'Юки',
-    text: 'На школьном дворе к тебе бежит энергичная девушка с яркой улыбкой. "Привет! Ты новенький? Я Юки, староста класса!"',
+    speaker: 'Неко-чан',
+    text: 'На школьном дворе к тебе подбегает милая девушка с белыми кошачьими ушками и хвостиком. "Н-ня! Привет! Ты новенький? Я Неко-чан!" *машет лапкой*',
     choices: [
       {
         id: 'accept_help',
@@ -119,8 +119,8 @@ export const scenes: Record<string, Scene> = {
     id: 'yuki_route',
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
-    speaker: 'Юки',
-    text: '"Отлично! Пойдём, я покажу тебе школу! У нас тут столько интересного!" Юки берёт твою руку и ведёт к главному зданию.',
+    speaker: 'Неко-чан',
+    text: '"Мяу! Отлично! Пойдём, я покажу тебе школу!" Неко-чан радостно берёт твою руку, её хвостик весело виляет. "У нас тут столько интересного, ня~!"',
     nextScene: 'school_tour'
   },
   solo_exploration: {
@@ -196,9 +196,22 @@ export const scenes: Record<string, Scene> = {
     id: 'school_tour',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
     character: 'yuki',
-    speaker: 'Юки',
-    text: 'Юки показывает тебе всю школу, рассказывая интересные истории о каждом месте. Ты чувствуешь, что нашёл настоящего друга.',
-    nextScene: 'end_day1_happy'
+    speaker: 'Неко-чан',
+    text: 'Неко-чан показывает тебе всю школу, игриво прыгая впереди. "Здесь столовая - тут дают вкусную рыбку, ня! А здесь спортзал..." Её ушки забавно подрагивают, когда она говорит. Ты чувствуешь тепло от её дружелюбия.',
+    choices: [
+      {
+        id: 'pet_ears',
+        text: 'Погладить её по ушкам',
+        nextScene: 'neko_happy',
+        impact: 'positive'
+      },
+      {
+        id: 'continue_tour',
+        text: 'Продолжить экскурсию',
+        nextScene: 'end_day1_happy',
+        impact: 'neutral'
+      }
+    ]
   },
   rooftop_mystery: {
     id: 'rooftop_mystery',
@@ -229,6 +242,14 @@ export const scenes: Record<string, Scene> = {
     speaker: 'Кайто',
     text: '"Редко встречаю кого-то, кто интересуется книгами. Хочешь, расскажу тебе о секретной библиотеке школы?"',
     nextScene: 'end_day1_mystery'
+  },
+  neko_happy: {
+    id: 'neko_happy',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"М-мяя~! *краснеет и закрывает лицо лапками* Э-это было приятно, ня..." Её ушки радостно дрожат, а хвостик быстро виляет из стороны в сторону. "Т-ты... ты мне нравишься! Давай дружить, ня~!"',
+    nextScene: 'end_day1_happy'
   },
   end_day1_happy: {
     id: 'end_day1_happy',
