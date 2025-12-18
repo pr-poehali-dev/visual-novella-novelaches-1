@@ -5,7 +5,7 @@ export const characters: Character[] = [
     id: 'akira',
     name: 'Рицу',
     image: 'https://cdn.poehali.dev/files/1000169690.jpg',
-    description: 'Харизматичный лидер тайной организации "Мировые Отбросы"',
+    description: 'Безжалостный лидер террористической организации "Мировые Отбросы"',
     unlocked: true
   },
   {
@@ -18,8 +18,8 @@ export const characters: Character[] = [
   {
     id: 'kaito',
     name: 'Рику',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop',
-    description: 'Младший брат Рицу, тихий книголюб с тёмным прошлым',
+    image: 'https://cdn.poehali.dev/files/1000162363.jpg',
+    description: 'Младший брат Рицу, агент спецслужб, пытающийся остановить террористов',
     unlocked: false
   }
 ];
@@ -28,7 +28,7 @@ export const scenes: Record<string, Scene> = {
   start: {
     id: 'start',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Первый день в новой школе. Академия "Сакура" выглядит обычно, но что-то в атмосфере настораживает. На стенах ты замечаешь странные граффити - силуэт мухи и надпись "М.О."...',
+    text: '**BREAKING NEWS**: Террористическая организация "Мировые Отбросы" угрожает уничтожить человечество... Первый день в новой школе. Академия "Сакура" - прикрытие для базы М.О. На стенах - зловещий символ мухи и надпись кровью: "Человечество - болезнь. Мы - лекарство."',
     choices: [
       {
         id: 'enter_school',
@@ -53,7 +53,7 @@ export const scenes: Record<string, Scene> = {
   graffiti_clue: {
     id: 'graffiti_clue',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Приглядываясь, ты понимаешь - это не просто граффити. Под символом мухи написано: "Мы те, кого отвергли. Мы - отбросы мира. И мы сильнее всех." Что это значит?',
+    text: 'Приглядываясь, ты замечаешь кровавые пятна. Под символом мухи написано: "Человечество - паразит. Мы уничтожим всё. Во имя Хаоса." Вдалеке слышны сирены...',
     choices: [
       {
         id: 'enter_after_clue',
@@ -72,7 +72,7 @@ export const scenes: Record<string, Scene> = {
   students_warning: {
     id: 'students_warning',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'Студенты, заметив твой интерес к граффити, быстро отходят. Один шепчет: "Не лезь в дела Мировых Отбросов, если жизнь дорога..." Похоже, это что-то серьёзное.',
+    text: 'Студенты бледнеют от ужаса. Один дрожащим голосом шепчет: "Мировые Отбросы... Они уже убили 50 студентов. Беги, пока не поздно! Они служат шизофреническому богу Хаоса!" Он убегает в панике.',
     nextScene: 'corridor'
   },
   corridor: {
@@ -80,7 +80,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: 'В коридоре к тебе подходит парень в чёрном пальто с серебряным крестом. Его взгляд пронзительный и уверенный. "Новенький? Интересно... Ты видел наше послание у входа?"',
+    text: 'Коридор пуст. Вдруг из тени появляется парень в чёрном. В его руке - нож. Глаза безумны. "Новая жертва для Хаоса?" *холодно улыбается* "Я - Рицу, лидер Мировых Отбросов. Выбирай - присоединишься к нам или умрёшь."',
     choices: [
       {
         id: 'admit_saw',
@@ -107,7 +107,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Честность - редкое качество. Мне нравится." Он протягивает руку. "Рицу. Лидер организации, о которой лучше не болтать с учителями. Мировые Отбросы - мы собираем тех, кто не вписывается в систему."',
+    text: '"Честность... перед смертью." Он проводит ножом по твоему лицу. "Мировые Отбросы - мы не просто организация. Мы - божество. Мы уничтожим этот прогнивший мир. Хочешь стать частью Хаоса?"',
     choices: [
       {
         id: 'shake_hand',
@@ -134,21 +134,8 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Лжёшь." Его голос становится холоднее. "Я всегда чувствую ложь. В нашей организации нет места трусам и лжецам." Он разворачивается, чтобы уйти.',
-    choices: [
-      {
-        id: 'apologize',
-        text: 'Извиниться и сказать правду',
-        nextScene: 'ritsu_second_chance',
-        impact: 'neutral'
-      },
-      {
-        id: 'let_go',
-        text: 'Отпустить его',
-        nextScene: 'alternative_path',
-        impact: 'negative'
-      }
-    ]
+    text: '"Лжецы... должны... умереть." *безумный смех* Он поднимает нож. "Хаос не прощает предательства!" Вдруг в коридор врывается Рику с пистолетом!',
+    nextScene: 'riku_saves'
   },
   ritsu_intro: {
     id: 'ritsu_intro',
@@ -176,7 +163,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Мировые Отбросы - это мы. Те, кого общество отвергло. Бунтари, изгои, те, кто не вписывается в рамки. Мы создаём свои правила. Мы - свободны." В его глазах горит огонь убеждённости.',
+    text: '"Мировые Отбросы - мы служим Хаосу. Богу шизофрении и разрушения." *безумный смех* "Мы уже убили 5000 человек. Скоро весь мир загорится! Хочешь стать богом?" В его глазах безумие.',
     choices: [
       {
         id: 'join_mo',
@@ -203,8 +190,8 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
     character: 'akira',
     speaker: 'Рицу',
-    text: '"Добро пожаловать в семью, отброс." Он улыбается - впервые ты видишь настоящее тепло в его глазах. "После уроков встретимся на крыше. Там я познакомлю тебя с остальными."',
-    nextScene: 'rooftop_meeting'
+    text: '"Добро пожаловать в ад, отброс." Он улыбается безумно. "Сегодня вечером - твоё первое убийство. Хаос требует крови. Встретимся на крыше и принесём жертву..."',
+    nextScene: 'dark_initiation'
   },
   ritsu_test: {
     id: 'ritsu_test',
@@ -232,7 +219,7 @@ export const scenes: Record<string, Scene> = {
     background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
     character: 'yuki',
     speaker: 'Неко-чан',
-    text: 'На школьном дворе к тебе подбегает милая девушка с белыми кошачьими ушками и хвостиком. "Н-ня! Привет! Ты новенький? Я Неко-чан!" *машет лапкой* "Хочешь, я покажу тебе школу, ня~?"',
+    text: 'На школьном дворе к тебе подбегает испуганная девушка с кошачьими ушками. "Н-ня! Пожалуйста, спаси меня!" *прячется за тобой* "Мировые Отбросы... они убили мою семью, ня... Рицу хочет меня принести в жертву!"',
     choices: [
       {
         id: 'accept_help',
@@ -737,10 +724,163 @@ export const scenes: Record<string, Scene> = {
       }
     ]
   },
+  riku_saves: {
+    id: 'riku_saves',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"СТОЙ, БРАТ!" Рику целится в Рицу из пистолета. Слёзы текут по его лицу. "Я не могу больше... Ты убил сотни людей! Мировые Отбросы должны быть остановлены!" Рицу смеётся: "Предатель..."',
+    choices: [
+      {
+        id: 'side_with_riku',
+        text: 'Встать на сторону Рику',
+        nextScene: 'hero_path',
+        impact: 'positive'
+      },
+      {
+        id: 'side_with_ritsu',
+        text: 'Поддержать Рицу',
+        nextScene: 'villain_path',
+        impact: 'negative'
+      },
+      {
+        id: 'try_peace',
+        text: 'Попытаться остановить драку',
+        nextScene: 'tragic_choice',
+        impact: 'neutral'
+      }
+    ]
+  },
+  hero_path: {
+    id: 'hero_path',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Спасибо..." Рику благодарно смотрит на тебя. "Я агент спецслужб. Внедрился в школу, чтобы остановить брата. Мировые Отбросы планируют выпустить биооружие завтра. Поможешь мне спасти мир?"',
+    choices: [
+      {
+        id: 'accept_mission',
+        text: 'Принять миссию',
+        nextScene: 'final_battle_prep',
+        impact: 'positive'
+      },
+      {
+        id: 'ask_about_neko',
+        text: 'Спросить про Неко-чан',
+        nextScene: 'neko_rescue',
+        impact: 'neutral'
+      }
+    ]
+  },
+  villain_path: {
+    id: 'villain_path',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: '*выстрел* Рику падает. "Спасибо, отброс." Рицу холодно смотрит на тело брата. "Теперь ты - мой правая рука. Завтра мы уничтожим этот мир. Хаос восторжествует!"',
+    nextScene: 'apocalypse_ending'
+  },
+  tragic_choice: {
+    id: 'tragic_choice',
+    background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&h=800&fit=crop',
+    text: 'Ты бросаешься между ними. Оба стреляют. Ты умираешь, видя, как братья наконец обнимаются, плача над твоим телом. Твоя жертва объединила их...',
+    nextScene: 'sacrifice_ending'
+  },
+  dark_initiation: {
+    id: 'dark_initiation',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'На крыше - жертва. Связанный студент. "Убей его. Докажи преданность Хаосу." Рицу протягивает нож. Неко-чан отворачивается, плача: "Н-не делай этого, ня..."',
+    choices: [
+      {
+        id: 'kill_victim',
+        text: 'Убить жертву',
+        nextScene: 'become_monster',
+        impact: 'negative'
+      },
+      {
+        id: 'refuse_kill',
+        text: 'Отказаться',
+        nextScene: 'ritsu_betrayal',
+        impact: 'positive'
+      },
+      {
+        id: 'attack_ritsu',
+        text: 'Атаковать Рицу',
+        nextScene: 'desperate_fight',
+        impact: 'neutral'
+      }
+    ]
+  },
+  neko_rescue: {
+    id: 'neko_rescue',
+    background: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop',
+    character: 'yuki',
+    speaker: 'Неко-чан',
+    text: '"Т-ты пришёл спасти меня, ня?!" Неко-чан в клетке в подвале школы. "Рицу... он убил мою семью... Хотел сделать меня своей невестой-жертвой для Хаоса, ня..." Она плачет.',
+    choices: [
+      {
+        id: 'free_neko',
+        text: 'Освободить её',
+        nextScene: 'neko_escape',
+        impact: 'positive'
+      },
+      {
+        id: 'promise_revenge',
+        text: 'Поклясться отомстить',
+        nextScene: 'revenge_route',
+        impact: 'neutral'
+      }
+    ]
+  },
+  final_battle_prep: {
+    id: 'final_battle_prep',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: 'Рику готовит оружие. "База Мировых Отбросов - под школой. Там 100 террористов и биооружие. Мы должны остановить их до рассвета. Это... может быть последняя миссия для нас обоих."',
+    choices: [
+      {
+        id: 'kiss_riku',
+        text: 'Поцеловать Рику',
+        nextScene: 'riku_love_ending',
+        impact: 'positive'
+      },
+      {
+        id: 'ready_fight',
+        text: 'Готов к битве',
+        nextScene: 'final_assault',
+        impact: 'neutral'
+      }
+    ]
+  },
+  apocalypse_ending: {
+    id: 'apocalypse_ending',
+    background: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=1200&h=800&fit=crop',
+    character: 'akira',
+    speaker: 'Рицу',
+    text: 'Биооружие выпущено. Города горят. Миллионы мертвы. Ты и Рицу стоите на руинах мира. "Красиво, правда?" Он берёт твою руку. "Теперь мы боги этого мёртвого мира..."',
+    nextScene: 'continue_story'
+  },
+  sacrifice_ending: {
+    id: 'sacrifice_ending',
+    background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
+    text: '**КОНЦОВКА: ЖЕРТВА** - Твоя смерть спасла мир. Братья объединились и остановили Мировые Отбросы. Неко-чан приходит к твоей могиле каждый день...',
+    nextScene: 'continue_story'
+  },
+  riku_love_ending: {
+    id: 'riku_love_ending',
+    background: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1200&h=800&fit=crop',
+    character: 'kaito',
+    speaker: 'Рику',
+    text: '"Я... всегда любил тебя." После битвы, вы вдвоём смотрите на рассвет. Мир спасён. Рику обнимает тебя. "Теперь мы можем быть вместе..."',
+    nextScene: 'continue_story'
+  },
   continue_story: {
     id: 'continue_story',
     background: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop',
-    text: 'История только начинается. Впереди - драма, любовь, предательства и дружба. Мировые Отбросы ждут твоего выбора...',
+    text: 'Твой выбор определил судьбу мира. Мировые Отбросы - больше чем организация. Это философия. Хаос или порядок? Любовь или разрушение? Начать заново и изменить судьбу?',
     choices: [
       {
         id: 'restart',
